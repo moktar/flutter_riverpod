@@ -546,6 +546,12 @@
       "rootUri": "../examples/counter",
       "packageUri": "lib/",
       "languageVersion": "3.10"
+    },
+    {
+      "name": "todos",
+      "rootUri": "../examples/todos",
+      "packageUri": "lib/",
+      "languageVersion": "3.10"
     }
   ],
   "generator": "pub",
