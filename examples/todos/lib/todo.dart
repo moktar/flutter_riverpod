@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart' show immutable;
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:uuid/uuid.dart';
 
 const _uuid = Uuid();
@@ -23,6 +23,12 @@ class Todo {
   }
 }
 
+/// Creates a [TodoList] and initialise it with pre-defined values.
+///
+/// We are using [StateNotifierProvider] here as a `List<Todo>` is a complex
+/// object, with advanced business logic like how to edit a todo.
+final todoListProvider = NotifierProvider<TodoList, List<Todo>>(TodoList.new);
+
 /// An object that controls a list of [Todo].
 class TodoList extends Notifier<List<Todo>> {
   @override
@@ -33,7 +39,13 @@ class TodoList extends Notifier<List<Todo>> {
   ];
 
   void add(String description) {
-    state = [...state, Todo(id: _uuid.v4(), description: description)];
+    state = [
+      ...state,
+      Todo(
+        id: _uuid.v4(),
+        description: description,
+      ),
+    ];
   }
 
   void toggle(String id) {
@@ -54,7 +66,11 @@ class TodoList extends Notifier<List<Todo>> {
     state = [
       for (final todo in state)
         if (todo.id == id)
-          Todo(id: todo.id, completed: todo.completed, description: description)
+          Todo(
+            id: todo.id,
+            completed: todo.completed,
+            description: description,
+          )
         else
           todo,
     ];

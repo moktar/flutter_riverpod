@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:hooks_riverpod/legacy.dart';
 
+import 'keys.dart';
 import 'todo.dart';
 
-/// Some keys used for testing
-final addTodoKey = UniqueKey();
-final activeFilterKey = UniqueKey();
-final completedFilterKey = UniqueKey();
-final allFilterKey = UniqueKey();
-
-/// Creates a [TodoList] and initialize it with pre-defined values.
-///
-/// We are using [NotifierProvider] here as a `List<Todo>` is a complex
-/// object, with advanced business logic like how to edit a todo.
-final todoListProvider = NotifierProvider<TodoList, List<Todo>>(TodoList.new);
-
 /// The different ways to filter the list of todos
-enum TodoListFilter { all, active, completed }
+enum TodoListFilter {
+  all,
+  active,
+  completed,
+}
 
 /// The currently active filter.
 ///
-/// We use [StateProvider] here as there is no fancy logic behind manipulating
+/// We use [NotifierProvider] here as there is no fancy logic behind manipulating
 /// the value since it's just enum.
-final todoListFilter = StateProvider((_) => TodoListFilter.all);
+final todoListFilter = NotifierProvider<TodoListFilterNotifier, TodoListFilter>(
+  TodoListFilterNotifier.new,
+);
+class TodoListFilterNotifier extends Notifier<TodoListFilter> {
+  @override
+  TodoListFilter build() => TodoListFilter.all;
+}
 
 /// The number of uncompleted todos
 ///
@@ -32,9 +30,9 @@ final todoListFilter = StateProvider((_) => TodoListFilter.all);
 /// Even multiple widgets try to read the number of uncompleted todos,
 /// the value will be computed only once (until the todo-list changes).
 ///
-/// This will also optimize unneeded rebuilds if the todo-list changes, but the
+/// This will also optimise unneeded rebuilds if the todo-list changes, but the
 /// number of uncompleted todos doesn't (such as when editing a todo).
-final uncompletedTodosCount = Provider<int>((ref) {
+final incompleteTodosCount = Provider<int>((ref) {
   return ref.watch(todoListProvider).where((todo) => !todo.completed).length;
 });
 
@@ -61,16 +59,18 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: Home());
+    return const MaterialApp(
+      home: Home(),
+    );
   }
 }
 
 class Home extends HookConsumerWidget {
-  const Home({super.key});
+  const Home({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -106,7 +106,9 @@ class Home extends HookConsumerWidget {
                   ref.read(todoListProvider.notifier).remove(todos[i]);
                 },
                 child: ProviderScope(
-                  overrides: [_currentTodo.overrideWithValue(todos[i])],
+                  overrides: [
+                    _currentTodo.overrideWithValue(todos[i]),
+                  ],
                   child: const TodoItem(),
                 ),
               ),
@@ -119,7 +121,9 @@ class Home extends HookConsumerWidget {
 }
 
 class Toolbar extends HookConsumerWidget {
-  const Toolbar({super.key});
+  const Toolbar({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -135,7 +139,7 @@ class Toolbar extends HookConsumerWidget {
         children: [
           Expanded(
             child: Text(
-              '${ref.watch(uncompletedTodosCount)} items left',
+              '${ref.watch(incompleteTodosCount)} items left',
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -144,12 +148,11 @@ class Toolbar extends HookConsumerWidget {
             message: 'All todos',
             child: TextButton(
               onPressed: () =>
-                  ref.read(todoListFilter.notifier).state = TodoListFilter.all,
+              ref.read(todoListFilter.notifier).state = TodoListFilter.all,
               style: ButtonStyle(
                 visualDensity: VisualDensity.compact,
-                foregroundColor: WidgetStatePropertyAll(
-                  textColorFor(TodoListFilter.all),
-                ),
+                foregroundColor:
+                MaterialStateProperty.all(textColorFor(TodoListFilter.all)),
               ),
               child: const Text('All'),
             ),
@@ -162,7 +165,7 @@ class Toolbar extends HookConsumerWidget {
                   TodoListFilter.active,
               style: ButtonStyle(
                 visualDensity: VisualDensity.compact,
-                foregroundColor: WidgetStatePropertyAll(
+                foregroundColor: MaterialStateProperty.all(
                   textColorFor(TodoListFilter.active),
                 ),
               ),
@@ -177,7 +180,7 @@ class Toolbar extends HookConsumerWidget {
                   TodoListFilter.completed,
               style: ButtonStyle(
                 visualDensity: VisualDensity.compact,
-                foregroundColor: WidgetStatePropertyAll(
+                foregroundColor: MaterialStateProperty.all(
                   textColorFor(TodoListFilter.completed),
                 ),
               ),
@@ -191,7 +194,7 @@ class Toolbar extends HookConsumerWidget {
 }
 
 class Title extends StatelessWidget {
-  const Title({super.key});
+  const Title({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -215,14 +218,10 @@ class Title extends StatelessWidget {
 ///
 /// This ensures that when we add/remove/edit todos, only what the
 /// impacted widgets rebuilds, instead of the entire list of items.
-final _currentTodo = Provider<Todo>(
-  dependencies: const [],
-  (ref) => throw UnimplementedError(),
-);
+final _currentTodo = Provider<Todo>((ref) => throw UnimplementedError());
 
-/// The widget that that displays the components of an individual Todo Item
 class TodoItem extends HookConsumerWidget {
-  const TodoItem({super.key});
+  const TodoItem({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -260,10 +259,10 @@ class TodoItem extends HookConsumerWidget {
           ),
           title: itemIsFocused
               ? TextField(
-                  autofocus: true,
-                  focusNode: textFieldFocusNode,
-                  controller: textEditingController,
-                )
+            autofocus: true,
+            focusNode: textFieldFocusNode,
+            controller: textEditingController,
+          )
               : Text(todo.description),
         ),
       ),
@@ -274,14 +273,17 @@ class TodoItem extends HookConsumerWidget {
 bool useIsFocused(FocusNode node) {
   final isFocused = useState(node.hasFocus);
 
-  useEffect(() {
-    void listener() {
-      isFocused.value = node.hasFocus;
-    }
+  useEffect(
+        () {
+      void listener() {
+        isFocused.value = node.hasFocus;
+      }
 
-    node.addListener(listener);
-    return () => node.removeListener(listener);
-  }, [node]);
+      node.addListener(listener);
+      return () => node.removeListener(listener);
+    },
+    [node],
+  );
 
   return isFocused.value;
 }
