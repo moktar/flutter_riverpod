@@ -8,3 +8,4 @@ workspace:
   - examples/first_app
   - examples/counter
   - examples/todos
+  - examples/random_number

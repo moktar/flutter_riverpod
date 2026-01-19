@@ -15,6 +15,9 @@
       <excludeFolder url="file://$MODULE_DIR$/examples/todos/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/examples/todos/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/examples/todos/build" />
+      <excludeFolder url="file://$MODULE_DIR$/examples/random_number/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/examples/random_number/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/examples/random_number/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -558,6 +558,12 @@
       "rootUri": "../examples/todos",
       "packageUri": "lib/",
       "languageVersion": "3.10"
+    },
+    {
+      "name": "random_number",
+      "rootUri": "../examples/random_number",
+      "packageUri": "lib/",
+      "languageVersion": "3.10"
     }
   ],
   "generator": "pub",
