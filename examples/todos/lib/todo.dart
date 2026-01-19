@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart' show immutable;
-import 'package:riverpod/riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:hooks_riverpod/legacy.dart';
 import 'package:uuid/uuid.dart';
 
 const _uuid = Uuid();
