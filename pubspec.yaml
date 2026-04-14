@@ -9,4 +9,3 @@ workspace:
   - examples/counter
   - examples/todos
   - examples/random_number
-  - examples/marvel
