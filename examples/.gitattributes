@@ -1,0 +1,13 @@
+# Keep repository language stats focused on handwritten app code.
+*/android/** linguist-generated=true
+*/ios/** linguist-generated=true
+*/linux/** linguist-generated=true
+*/macos/** linguist-generated=true
+*/windows/** linguist-generated=true
+*/web/** linguist-generated=true
+*/.dart_tool/** linguist-generated=true
+*/build/** linguist-generated=true
+*/runConfigurations/** linguist-generated=true
+*/.metadata linguist-generated=true
+*/**/*.iml linguist-generated=true
+*/lib/**/*.g.dart linguist-generated=true
