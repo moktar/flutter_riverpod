@@ -1,45 +1,16 @@
-# Counter Example
+# flutter_riverpod
 
-This example demonstrates a simple counter app built with Flutter and Riverpod.
+A new Flutter project.
 
-## What This App Shows
+## Getting Started
 
-- Using `ProviderScope` to enable Riverpod across the app
-- Creating app state with `@riverpod` code generation
-- Reading provider state in the UI with `ref.watch(...)`
-- Updating state through provider notifier methods
+This project is a starting point for a Flutter application.
 
-## How It Works
+A few resources to get you started if this is your first Flutter project:
 
-- `lib/main.dart` bootstraps the app with `ProviderScope`.
-- `lib/my_app.dart` defines:
-  - `Counter` provider (`@riverpod class Counter extends _$Counter`)
-  - `increment()` to update state
-  - `Home` widget that displays the count and increments on button press
-- `lib/my_app.g.dart` is generated code for the provider.
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-## Run The App
-
-From the workspace root:
-
-```bash
-flutter pub get
-cd examples/counter
-flutter run
-```
-
-## Run Tests
-
-```bash
-cd examples/counter
-flutter test
-```
-
-## Regenerate Riverpod Code
-
-If you change `@riverpod` declarations, regenerate code:
-
-```bash
-cd examples/counter
-dart run build_runner build --delete-conflicting-outputs
-```
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
