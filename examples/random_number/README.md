@@ -1,16 +1,41 @@
-# random_number
+# Random Number App
 
-A new Flutter project.
+This example demonstrates simple state management with Riverpod by generating
+and displaying random numbers.
 
-## Getting Started
+## What This App Does
 
-This project is a starting point for a Flutter application.
+- Shows a random number when the app starts
+- Generates a new random number when you tap **Generate**
+- Uses Riverpod `Notifier` + `NotifierProvider` for app state
 
-A few resources to get you started if this is your first Flutter project:
+The generated value range is `0` to `9998` (`Random().nextInt(9999)`).
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Project Structure
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- `lib/main.dart`: app entry point and `ProviderScope` setup
+- `RandomNumberGenerator`: `Notifier<int>` that holds and updates random state
+- `randomNumberProvider`: provider exposing notifier state
+- `RandomConsumer`: widget that watches and renders the current number
+
+## Run The App
+
+From the workspace root:
+
+```bash
+flutter pub get
+cd examples/random_number
+flutter run
+```
+
+## Run Tests
+
+```bash
+cd examples/random_number
+flutter test
+```
+
+## Note
+
+`test/widget_test.dart` is still the default Flutter counter template test and
+does not yet match this random-number app behavior.
