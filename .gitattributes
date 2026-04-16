@@ -1,0 +1,17 @@
+# Force language detection for Flutter source files on GitHub.
+*.dart linguist-language=Dart linguist-detectable=true
+*.kt linguist-language=Kotlin linguist-detectable=true
+*.swift linguist-language=Swift linguist-detectable=true
+*.java linguist-language=Java linguist-detectable=true
+*.m linguist-language=Objective-C linguist-detectable=true
+*.mm linguist-language=Objective-C++ linguist-detectable=true
+*.c linguist-language=C linguist-detectable=true
+*.cc linguist-language=C++ linguist-detectable=true
+*.cpp linguist-language=C++ linguist-detectable=true
+*.h linguist-language=C linguist-detectable=true
+
+# Keep generated/tooling files out of stats.
+*.g.dart linguist-generated=true
+.dart_tool/** linguist-generated=true
+.idea/** linguist-generated=true
+*.iml linguist-generated=true
