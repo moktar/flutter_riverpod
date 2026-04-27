@@ -1,22 +1,18 @@
-# Force language detection for Flutter source files on GitHub.
-*.dart linguist-language=Dart linguist-detectable=true
-*.kt linguist-language=Kotlin linguist-detectable=true
-*.swift linguist-language=Swift linguist-detectable=true
-*.java linguist-language=Java linguist-detectable=true
-*.m linguist-language=Objective-C linguist-detectable=true
-*.mm linguist-language=Objective-C++ linguist-detectable=true
-*.c linguist-language=C linguist-detectable=true
-*.cc linguist-language=C++ linguist-detectable=true
-*.cpp linguist-language=C++ linguist-detectable=true
-*.h linguist-language=C linguist-detectable=true
+# Explicit language mapping
+*.dart linguist-language=Dart
+*.kt linguist-language=Kotlin
+*.swift linguist-language=Swift
+*.java linguist-language=Java
+*.m linguist-language=Objective-C
+*.mm linguist-language=Objective-C++
+*.c linguist-language=C
+*.cc linguist-language=C++
+*.cpp linguist-language=C++
+*.h linguist-language=C
 
-# Ensure handwritten example source is always counted.
-examples/**/lib/** linguist-generated=false linguist-detectable=true
-examples/**/test/** linguist-generated=false linguist-detectable=true
-
-# Keep generated/tooling files out of stats.
-*.g.dart linguist-generated=true
-examples/**/lib/**/*.g.dart linguist-generated=true
-.dart_tool/** linguist-generated=true
-.idea/** linguist-generated=true
-*.iml linguist-generated=true
+# Generated and tooling files
+**/*.g.dart linguist-generated=true
+**/.dart_tool/** linguist-generated=true
+**/build/** linguist-generated=true
+**/.idea/** linguist-generated=true
+**/*.iml linguist-generated=true
