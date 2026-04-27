@@ -1,18 +1,17 @@
-# Explicit language mapping
-*.dart linguist-language=Dart
-*.kt linguist-language=Kotlin
-*.swift linguist-language=Swift
-*.java linguist-language=Java
-*.m linguist-language=Objective-C
-*.mm linguist-language=Objective-C++
-*.c linguist-language=C
-*.cc linguist-language=C++
-*.cpp linguist-language=C++
-*.h linguist-language=C
+# Keep Flutter source languages visible in GitHub Linguist language stats.
+# Ensure example app source is counted in language stats.
+examples/** -linguist-vendored -linguist-documentation
 
-# Generated and tooling files
-**/*.g.dart linguist-generated=true
-**/.dart_tool/** linguist-generated=true
-**/build/** linguist-generated=true
-**/.idea/** linguist-generated=true
-**/*.iml linguist-generated=true
+*.dart linguist-language=Dart linguist-detectable=true linguist-generated=false
+*.kt linguist-language=Kotlin linguist-detectable=true linguist-generated=false
+*.kts linguist-language=Kotlin linguist-detectable=true linguist-generated=false
+*.swift linguist-language=Swift linguist-detectable=true linguist-generated=false
+*.m linguist-language=Objective-C linguist-detectable=true linguist-generated=false
+*.mm linguist-language=Objective-C++ linguist-detectable=true linguist-generated=false
+*.cc linguist-language=C++ linguist-detectable=true linguist-generated=false
+*.cpp linguist-language=C++ linguist-detectable=true linguist-generated=false
+*.h linguist-detectable=true linguist-generated=false
+
+# Ignore generated plugin registrant files so they do not skew percentages.
+**/GeneratedPluginRegistrant.* linguist-generated=true
+**/generated_plugin_registrant.* linguist-generated=true
