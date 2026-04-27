@@ -10,4 +10,7 @@
 */runConfigurations/** linguist-generated=true
 */.metadata linguist-generated=true
 */**/*.iml linguist-generated=true
+*/lib/** linguist-generated=false linguist-detectable=true
+*/test/** linguist-generated=false linguist-detectable=true
 */lib/**/*.g.dart linguist-generated=true
+*/lib/**/*.dart linguist-language=Dart linguist-detectable=true

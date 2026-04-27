@@ -10,8 +10,13 @@
 *.cpp linguist-language=C++ linguist-detectable=true
 *.h linguist-language=C linguist-detectable=true
 
+# Ensure handwritten example source is always counted.
+examples/**/lib/** linguist-generated=false linguist-detectable=true
+examples/**/test/** linguist-generated=false linguist-detectable=true
+
 # Keep generated/tooling files out of stats.
 *.g.dart linguist-generated=true
+examples/**/lib/**/*.g.dart linguist-generated=true
 .dart_tool/** linguist-generated=true
 .idea/** linguist-generated=true
 *.iml linguist-generated=true
